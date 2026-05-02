@@ -1,0 +1,5 @@
+# Ignore local environment secrets
+backend/.env
+
+# Ignore generated files
+node_modules/
