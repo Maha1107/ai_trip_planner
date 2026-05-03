@@ -1,0 +1,18 @@
+{
+  "root": "trip-planner-frontend",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-builds",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
