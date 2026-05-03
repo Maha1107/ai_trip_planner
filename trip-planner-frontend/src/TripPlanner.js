@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './TripPlanner.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+
 function TripPlanner() {
   const navigate = useNavigate();
   const [destinations, setDestinations] = useState([]);
@@ -42,7 +44,7 @@ function TripPlanner() {
 
   useEffect(() => {
     // Fetch destinations for autocomplete
-    fetch('http://localhost:5001/destinations')
+    fetch(`${API_BASE_URL}/destinations`)
       .then(response => response.json())
       .then(data => setDestinations(data))
       .catch(err => console.error('Error fetching destinations:', err));
@@ -63,7 +65,7 @@ function TripPlanner() {
       setTripData(prev => ({ ...prev, startDate: dateString }));
 
       // Search for flights
-      const flightResponse = await fetch('http://localhost:5001/search-flights-itinerary', {
+      const flightResponse = await fetch(`${API_BASE_URL}/search-flights-itinerary`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ from, to, date: dateString, members: 2 })
@@ -115,7 +117,7 @@ function TripPlanner() {
   const searchHotelsForSelection = async (destination, date) => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5001/search-hotels', {
+      const response = await fetch(`${API_BASE_URL}/search-hotels`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ destination, date, starRating: 4 })
@@ -189,7 +191,7 @@ function TripPlanner() {
     setLoading(true);
     try {
       // Generate return flight using the collected return flight details
-      const returnFlightResponse = await fetch('http://localhost:5001/search-flights-itinerary', {
+      const returnFlightResponse = await fetch(`${API_BASE_URL}/search-flights-itinerary`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -214,7 +216,7 @@ function TripPlanner() {
       }
 
       // Generate itinerary
-      const response = await fetch('http://localhost:5001/generate-itinerary', {
+      const response = await fetch(`${API_BASE_URL}/generate-itinerary`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -316,7 +318,7 @@ function TripPlanner() {
           setTripData(prev => ({ ...prev, destination: matchedDestination }));
           
           // Get itinerary preview for the destination
-          fetch('http://localhost:5001/itinerary-preview', {
+          fetch(`${API_BASE_URL}/itinerary-preview`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ destination: matchedDestination, days: 3 }) // Default 3 days preview
