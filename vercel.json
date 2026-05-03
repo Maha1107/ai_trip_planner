@@ -1,14 +1,6 @@
 {
-  "root": "trip-planner-frontend",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-builds",
-      "config": {
-        "distDir": "build"
-      }
-    }
-  ],
+  "buildCommand": "cd trip-planner-frontend && npm install && npm run build",
+  "outputDirectory": "trip-planner-frontend/build",
   "routes": [
     {
       "src": "/(.*)",
