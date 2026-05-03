@@ -1,4 +1,10 @@
 {
   "buildCommand": "cd trip-planner-frontend && npm install && npm run build",
-  "outputDirectory": "trip-planner-frontend/build"
+  "outputDirectory": "trip-planner-frontend/build",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
