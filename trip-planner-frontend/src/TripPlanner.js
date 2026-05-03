@@ -2,7 +2,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './TripPlanner.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+const rawApiBase = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+const API_BASE_URL = (() => {
+  let base = rawApiBase.trim();
+  if (!base) return 'http://localhost:5001';
+  // Add protocol if missing
+  if (!base.startsWith('http://') && !base.startsWith('https://')) {
+    base = `https://${base}`;
+  }
+  // Remove trailing slashes
+  return base.replace(/\/+$|\/$/, '');
+})();
 
 function TripPlanner() {
   const navigate = useNavigate();
