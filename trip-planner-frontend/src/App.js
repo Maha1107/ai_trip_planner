@@ -6,21 +6,35 @@ function App() {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate('/plan');
+    navigate('/chat');
   };
 
   return (
     <div className="App">
-      <div className="floating-elements">
-        <div className="floating-1">🌍</div>
-        <div className="floating-2">✈️</div>
-        <div className="floating-3">🏕️</div>
-      </div>
       <header className="App-header">
-        <h1>Discover your next adventure with mema</h1>
-        <p>Personalized itineraries at your fingertips</p>
-        <p>Your personal trip planner and travel curator, creating custom itineraries tailored to your interests and budget</p>
-        <button onClick={handleGetStarted}>Get Started</button>
+        <div className="hero-copy">
+          <span className="eyebrow">AI Trip Planner</span>
+          <h1>Plan smarter trips in seconds</h1>
+          <p className="hero-description">
+            Personalized flight, hotel, and itinerary planning with a single message. Travel planning that feels effortless and stays within your budget.
+          </p>
+          <button onClick={handleGetStarted}>Get Started</button>
+        </div>
+
+        <div className="hero-panel">
+          <div className="stat-card">
+            <span>Destinations</span>
+            <strong>20+</strong>
+          </div>
+          <div className="stat-card">
+            <span>Trips planned</span>
+            <strong>1,000+</strong>
+          </div>
+          <div className="stat-card">
+            <span>Easy planning</span>
+            <strong>One input</strong>
+          </div>
+        </div>
       </header>
     </div>
   );
