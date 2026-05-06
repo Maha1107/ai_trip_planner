@@ -3,3 +3,4 @@ backend/.env
 
 # Ignore generated files
 node_modules/
+trip-planner-frontend/build/
