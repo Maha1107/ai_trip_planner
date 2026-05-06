@@ -16,7 +16,6 @@ const Chat = () => {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [tripData, setTripData] = useState(null);
-  const [lastIntent, setLastIntent] = useState(null);
   const messagesEndRef = useRef(null);
 
   const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
@@ -59,7 +58,6 @@ const Chat = () => {
 
       const data = await response.json();
       addMessage(data.message, 'bot');
-      setLastIntent(data.type);
 
       if (data.type === 'trip' && data.data) {
         setTripData(data.data);
