@@ -66,10 +66,10 @@ async function handleChat(req, res) {
           }
 
           // Search outbound flights (one-way)
-          const flightResults = await tripService.searchFlights(data.source, data.destination, data.startDate, null);
+          const outboundFlights = await tripService.getFlights(data.source, data.destination, data.startDate);
 
-          // Search return flights (one-way)
-          const returnFlightResults = await tripService.searchFlights(data.destination, data.source, data.endDate, null);
+          // Search inbound flights (one-way return)
+          const inboundFlights = await tripService.getFlights(data.destination, data.source, data.endDate);
 
           // Search hotels
           const hotelResults = await tripService.searchHotels(data.destination, data.startDate, data.endDate);
@@ -81,7 +81,7 @@ async function handleChat(req, res) {
           const itineraryResult = await tripService.generateItinerary(data.destination, data.startDate, data.endDate, placeResults, data.budget);
 
           // Calculate budget
-          const budgetPlan = tripService.calculateBudgetPlan(flightResults, hotelResults, data.budget);
+          const budgetPlan = tripService.calculateBudgetPlan(outboundFlights, hotelResults, data.budget);
 
           return res.json({
             type: 'trip',
@@ -93,8 +93,8 @@ async function handleChat(req, res) {
               endDate: data.endDate,
               days: Math.max(1, Math.ceil((new Date(data.endDate) - new Date(data.startDate)) / (1000 * 60 * 60 * 24)) + 1),
               budget: data.budget,
-              flights: flightResults,
-              returnFlights: returnFlightResults,
+              outboundFlights: outboundFlights,
+              inboundFlights: inboundFlights,
               hotels: hotelResults,
               itinerary: itineraryResult
             }

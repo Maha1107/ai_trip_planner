@@ -31,7 +31,9 @@ app.post('/search-flights', async (req, res) => {
       return res.status(400).json({ error: 'source, destination, and startDate are required' });
     }
 
-    const flights = await tripService.searchFlights(source, destination, startDate, returnDate);
+    const flights = returnDate
+      ? await tripService.searchFlights(source, destination, startDate, returnDate)
+      : await tripService.getFlights(source, destination, startDate);
     return res.json({ flights, message: 'Real-time flight results from SERP API' });
   } catch (error) {
     console.error('Search flights route error:', error.message || error);

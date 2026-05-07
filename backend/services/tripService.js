@@ -644,6 +644,7 @@ async function searchFlights(source, destination, startDate, returnDate) {
       departure_id: departureId,
       arrival_id: arrivalId,
       outbound_date: startDate,
+      type: 2,
       adults: 1,
       hl: 'en',
       gl: 'us',
@@ -651,6 +652,7 @@ async function searchFlights(source, destination, startDate, returnDate) {
     };
 
     if (returnDate) {
+      params.type = 1;
       params.return_date = returnDate;
     }
 
@@ -661,18 +663,18 @@ async function searchFlights(source, destination, startDate, returnDate) {
     if (flights.length) return flights;
 
     console.warn('Flight API returned no results for:', params);
-    throw new Error('No flight results returned');
+    return [];
   } catch (error) {
     console.error('Flight API error:', error.message || error);
     if (error.isSerpApiError) {
       throw error;
     }
-    return [
-      buildFallbackFlight(source, destination, startDate, 0),
-      buildFallbackFlight(source, destination, startDate, 1),
-      buildFallbackFlight(source, destination, startDate, 2)
-    ];
+    return [];
   }
+}
+
+async function getFlights(from, to, date) {
+  return searchFlights(from, to, date, null);
 }
 
 async function searchHotels(destination, checkInDate, checkOutDate) {
@@ -897,6 +899,7 @@ function validateDestination(destination) {
 
 module.exports = {
   searchFlights,
+  getFlights,
   searchHotels,
   searchPlaces,
   validateDestination,

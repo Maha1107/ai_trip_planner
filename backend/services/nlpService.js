@@ -135,7 +135,7 @@ function parseTripDetails(message) {
     result.endDate = formatDate(`${endMonth} ${endDay}${year ? `, ${year}` : ''}`);
   }
 
-  const startDateMatch = normalized.match(/(?:starting on|start(?:ing)?(?: date)?(?: is)?|start date|begin(?:ning)? on)\s*(\d{2}-\d{2}-\d{4}|\d{4}-\d{2}-\d{2}|[a-z]+\s+\d{1,2}(?:,?\s+\d{4})?)/i);
+  const startDateMatch = normalized.match(/(?:from|starting on|start(?:ing)?(?: date)?(?: is)?|start date|begin(?:ning)? on)\s+(\d{2}-\d{2}-\d{4}|\d{4}-\d{2}-\d{2}|[a-z]+\s+\d{1,2}(?:,?\s+\d{4})?)/i);
   if (startDateMatch) {
     const formatted = formatDate(startDateMatch[1]);
     if (formatted) {
@@ -143,8 +143,8 @@ function parseTripDetails(message) {
     }
   }
 
-  const endDateMatch = normalized.match(/(?:return(?:ing)? on|return date(?: is)?|back on|until|depart(?:ing)? back on?)\s*(\d{2}-\d{2}-\d{4}|\d{4}-\d{2}-\d{2}|[a-z]+\s+\d{1,2}(?:,?\s+\d{4})?)/i);
-  if (endDateMatch) {
+  const endDateMatch = normalized.match(/(?:to|return(?:ing)? on|return date(?: is)?|back on|until|depart(?:ing)? back on?)\s+(\d{2}-\d{2}-\d{4}|\d{4}-\d{2}-\d{2}|[a-z]+\s+\d{1,2}(?:,?\s+\d{4})?)/i);
+  if (endDateMatch && !result.endDate) {
     const formatted = formatDate(endDateMatch[1]);
     if (formatted) {
       result.endDate = formatted;

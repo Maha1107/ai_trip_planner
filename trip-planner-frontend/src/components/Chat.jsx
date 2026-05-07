@@ -70,8 +70,8 @@ const Chat = () => {
     }
   };
 
-  const flightOptions = tripData?.flights || [];
-  const returnFlightOptions = tripData?.returnFlights || [];
+  const flightOptions = tripData?.outboundFlights || [];
+  const returnFlightOptions = tripData?.inboundFlights || [];
   const hotelOptions = tripData?.hotels
     ? [...(tripData.hotels.cheap || []), ...(tripData.hotels.moderate || []), ...(tripData.hotels.luxury || [])]
     : [];
