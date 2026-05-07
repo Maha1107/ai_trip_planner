@@ -1,6 +1,6 @@
 # AI Enabled Trip Planner
 
-This project consists of a React frontend and an Express.js backend, integrated with a Random Forest AI prediction model for personalized trip planning.
+This project consists of a React frontend and an Express.js backend, integrated with SERP API and Gemini API for personalized trip planning.
 
 ## Features
 - **Landing Page**: Beautiful home page with travel-themed design and animations
@@ -12,8 +12,8 @@ This project consists of a React frontend and an Express.js backend, integrated 
 ## Tech Stack
 - **Frontend**: React.js with React Router for navigation
 - **Backend**: Express.js with Node.js
-- **AI Model**: Random Forest algorithm for trip cost predictions
-- **Data**: Travel agency datasets with destinations, costs, and recommendations
+- **API's Used**: SERP API, Gemini API
+
 
 ## Setup
 
