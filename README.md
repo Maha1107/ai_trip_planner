@@ -60,4 +60,4 @@ This project consists of a React frontend and an Express.js backend, integrated 
 - ✅ Real-time form validation
 - ✅ Loading states and error handling
 
-Open the frontend in your browser to see the landing page.
+Open the frontend in your browser to see the landing page .
